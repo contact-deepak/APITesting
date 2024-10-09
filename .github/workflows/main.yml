@@ -26,5 +26,5 @@ jobs:
 
       - name: Run Postman collection
         run: |
-          newman run Course Time.postman_collection.json \
+          newman run CourseTime.postman_collection.json \
           --environment workspace.postman_globals.json
