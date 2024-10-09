@@ -447,12 +447,12 @@
 		},
 		{
 			"key": "url",
-			"value": "",
+			"value": "https://api.staging.futurx.in/api",
 			"type": "string"
 		},
 		{
 			"key": "token",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJGbUxXeFBWRjlyMU1VbHlEQ3dReUYwRUppU1lsSURIcSIsInVzZXJJZCI6IjY2ZWJiMGQwZDg2MzU2YWEyNjI2NjQ0YSIsImlhdCI6MTcyODQ0ODM2Mn0.OkhOd3-lU-ceX4vV5raBkWvZpmLaq0ZtNU0CWg3JlWI",
 			"type": "string"
 		}
 	]
