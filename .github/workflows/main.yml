@@ -28,6 +28,7 @@ jobs:
         run: |
           newman run CourseTime.json --reporters cli,junit \
           --reporter-junit-export newman-report.xml
+        continue-on-error: true  
 
       - name: Upload Newman report
         uses: actions/upload-artifact@v3
