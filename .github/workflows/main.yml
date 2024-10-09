@@ -24,6 +24,13 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run Postman collection
+      - name: Run Postman collection with report
         run: |
-          newman run CourseTime.json 
+          newman run CourseTime.json --reporters cli,junit \
+          --reporter-junit-export newman-report.xml
+
+      - name: Upload Newman report
+        uses: actions/upload-artifact@v3
+        with:
+          name: newman-report
+          path: newman-report.xml
