@@ -34,6 +34,12 @@ jobs:
           --reporter-junit-export ./CourseTimereport.xml
         continue-on-error: true  
 
+      - name: Upload JUnit report
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-report
+          path: CourseTimereport.xml
+          
       - name: Run Postman collection with report
         # Continue even if the newman command fails (test failures)
         env:
@@ -48,6 +54,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: junit-report
-          path: |
-             CourseTimereport.xml
-             CourseTypereport.xml
+          path: CourseTypereport.xml
+             
