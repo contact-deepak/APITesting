@@ -31,11 +31,23 @@ jobs:
         run: |
           newman run CourseTime.json \
           --env-var "token=$POSTMAN_TOKEN" \
-          --reporter-junit-export ./report.xml
+          --reporter-junit-export ./CourseTimereport.xml
         continue-on-error: true  
+
+      - name: Run Postman collection with report
+        # Continue even if the newman command fails (test failures)
+        env:
+          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # This injects the secret token
+        run: |
+          newman run CourseType.json \
+          --env-var "token=$POSTMAN_TOKEN" \
+          --reporter-junit-export ./CourseTypereport.xml
+        continue-on-error: true    
 
       - name: Upload JUnit report
         uses: actions/upload-artifact@v3
         with:
           name: junit-report
-          path: report.xml
+          path: |
+             CourseTimereport.xml
+             CourseTypereport.xml
