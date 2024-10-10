@@ -26,8 +26,11 @@ jobs:
 
       - name: Run Postman collection with report
         # Continue even if the newman command fails (test failures)
+        env:
+          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # This injects the secret token
         run: |
-          newman run CourseTime.json --reporters cli,junit \
+          newman run CourseTime.json \
+          --env-var "token=$POSTMAN_TOKEN" \
           --reporter-junit-export ./report.xml
         continue-on-error: true  
 
