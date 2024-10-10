@@ -42,26 +42,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": {
-					"raw": "https://api.staging.futurx.in/api/course-times?limit=10",
-					"protocol": "https",
-					"host": [
-						"api",
-						"staging",
-						"futurx",
-						"in"
-					],
-					"path": [
-						"api",
-						"course-times"
-					],
-					"query": [
-						{
-							"key": "limit",
-							"value": "10"
-						}
-					]
-				}
+				"url": "https://{{url}}/course-times?limit=10"
 			},
 			"response": []
 		},
@@ -157,7 +138,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": "{{url}}/course-times/{{id}}"
+				"url": "https://{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -210,7 +191,7 @@
 						}
 					}
 				},
-				"url": "{{url}}/course-times/{{id}}"
+				"url": "https://{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -252,7 +233,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": "{{url}}/course-times/{{id}}"
+				"url":"https://{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -291,7 +272,7 @@
 						"value": "*/*"
 					}
 				],
-				"url": "{{url}}/course-times/{{id}}"
+				"url": "https://{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -333,7 +314,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": "{{url}}/course-times/{{id}}"
+				"url": "https://{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		}
@@ -371,12 +352,12 @@
 		},
 		{
 			"key": "url",
-			"value": "api.staging.futurx.in",
+			"value": "api.staging.futurx.in/api",
 			"type": "string"
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJ2QTh0VW1LVXBFMGNMVmRCZl90R2xWVHozbUxMOF96TSIsInVzZXJJZCI6IjY2ZWJiMGQwZDg2MzU2YWEyNjI2NjQ0YSIsImlhdCI6MTcyODUzNjU1MX0.W-NTdxNE5ZPH3bcXXnRQq3dYC0ynxiQi92rVxpGkW1c",
+			"value": "",
 			"type": "string"
 		}
 	]
