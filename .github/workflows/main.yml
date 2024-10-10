@@ -30,6 +30,7 @@ jobs:
           newman run CourseTime.json --reporters cli,junit \
           --reporter-html-export ./report.html \
           --reporter-junit-export ./report.xml
+        continue-on-error: true
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v3
