@@ -25,24 +25,14 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman collection with report
+        # Continue even if the newman command fails (test failures)
         run: |
           newman run CourseTime.json --reporters cli,junit \
           --reporter-junit-export newman-report.xml
-        continue-on-error: true  
+        continue-on-error: true  # Allow failure but continue the workflow
 
-      - name: Convert HTML report to PDF
-        run: |
-          npx puppeteer --eval "const puppeteer = require('puppeteer'); \
-          (async () => { \
-            const browser = await puppeteer.launch(); \
-            const page = await browser.newPage(); \
-            await page.goto('file://' + process.cwd() + '/newman-report.html'); \
-            await page.pdf({ path: 'newman-report.pdf', format: 'A4' }); \
-            await browser.close(); \
-          })();"
-
-      - name: Upload Newman PDF report
+      - name: Upload Newman report
         uses: actions/upload-artifact@v3
         with:
           name: newman-report
-          path: newman-report.pdf
+          path: newman-report.xml
