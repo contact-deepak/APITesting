@@ -96,7 +96,7 @@
 						}
 					}
 				},
-				"url": "https://{{url}}/api/course-times"
+				"url": "https://{{url}}/course-times"
 			},
 			"response": []
 		},
