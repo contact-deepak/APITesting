@@ -28,11 +28,17 @@ jobs:
         # Continue even if the newman command fails (test failures)
         run: |
           newman run CourseTime.json --reporters cli,junit \
-          --reporter-junit-export newman-report.xml
-        continue-on-error: true  # Allow failure but continue the workflow
+          --reporter-html-export ./report.html \
+          --reporter-junit-export ./report.xml
 
-      - name: Upload Newman report
+      - name: Upload HTML report
         uses: actions/upload-artifact@v3
         with:
-          name: newman-report
-          path: newman-report.xml
+          name: html-report
+          path: report.html
+
+      - name: Upload JUnit report
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-report
+          path: report.xml
