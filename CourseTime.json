@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "b7b610ce-66fb-44a3-8333-0202e8a95737",
 		"name": "Course Time",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "36805930",
 		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-b7b610ce-66fb-44a3-8333-0202e8a95737?action=share&source=collection_link&creator=36805930"
 	},
@@ -31,13 +31,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJ2QTh0VW1LVXBFMGNMVmRCZl90R2xWVHozbUxMOF96TSIsInVzZXJJZCI6IjY2ZWJiMGQwZDg2MzU2YWEyNjI2NjQ0YSIsImlhdCI6MTcyODUzNjU1MX0.W-NTdxNE5ZPH3bcXXnRQq3dYC0ynxiQi92rVxpGkW1c",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJ2QTh0VW1LVXBFMGNMVmRCZl90R2xWVHozbUxMOF96TSIsInVzZXJJZCI6IjY2ZWJiMGQwZDg2MzU2YWEyNjI2NjQ0YSIsImlhdCI6MTcyODUzNjU1MX0.W-NTdxNE5ZPH3bcXXnRQq3dYC0ynxiQi92rVxpGkW1c"
+					}
 				},
 				"method": "GET",
 				"header": [
@@ -95,13 +91,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "POST",
 				"header": [
@@ -123,15 +115,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{url}}/course-times",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times"
-					]
-				}
+				"url": "https://{{url}}/api/course-times"
 			},
 			"response": []
 		},
@@ -162,13 +146,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "GET",
 				"header": [
@@ -177,16 +157,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": {
-					"raw": "{{url}}/course-times/{{id}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times",
-						"{{id}}"
-					]
-				}
+				"url": "{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -215,13 +186,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "PUT",
 				"header": [
@@ -243,16 +210,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{url}}/course-times/{{id}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times",
-						"{{id}}"
-					]
-				}
+				"url": "{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -283,13 +241,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "GET",
 				"header": [
@@ -298,16 +252,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": {
-					"raw": "{{url}}/course-times/{{id}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times",
-						"{{id}}"
-					]
-				}
+				"url": "{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -335,13 +280,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "DELETE",
 				"header": [
@@ -350,16 +291,7 @@
 						"value": "*/*"
 					}
 				],
-				"url": {
-					"raw": "{{url}}/course-times/{{id}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times",
-						"{{id}}"
-					]
-				}
+				"url": "{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		},
@@ -390,13 +322,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token}}"
+					}
 				},
 				"method": "GET",
 				"header": [
@@ -405,16 +333,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": {
-					"raw": "{{url}}/course-times/{{id}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"course-times",
-						"{{id}}"
-					]
-				}
+				"url": "{{url}}/course-times/{{id}}"
 			},
 			"response": []
 		}
@@ -452,12 +371,12 @@
 		},
 		{
 			"key": "url",
-			"value": "",
+			"value": "api.staging.futurx.in",
 			"type": "string"
 		},
 		{
 			"key": "token",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJ2QTh0VW1LVXBFMGNMVmRCZl90R2xWVHozbUxMOF96TSIsInVzZXJJZCI6IjY2ZWJiMGQwZDg2MzU2YWEyNjI2NjQ0YSIsImlhdCI6MTcyODUzNjU1MX0.W-NTdxNE5ZPH3bcXXnRQq3dYC0ynxiQi92rVxpGkW1c",
 			"type": "string"
 		}
 	]
