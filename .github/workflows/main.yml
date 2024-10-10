@@ -22,7 +22,7 @@ jobs:
           node-version: '18' 
 
       - name: Install Newman
-        run: npm install -g newman
+        run: npm install -g newman newman-reporter-html newman-reporter-junit
 
       - name: Run Postman collection with report
         # Continue even if the newman command fails (test failures)
