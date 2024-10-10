@@ -335,8 +335,8 @@
 	],
 	"variable": [
 		{
-			"key": "id",
-			"value": ""
+			"key": "url",
+			"value": "api.staging.futurx.in"
 		},
 		{
 			"key": "name",
