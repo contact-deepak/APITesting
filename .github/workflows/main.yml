@@ -32,6 +32,7 @@ jobs:
           newman run CourseTime.json \
           --env-var "token=$POSTMAN_TOKEN" \
           --reporter-junit-export ./CourseTimereport.xml
+          ls -la
         continue-on-error: true  
 
       - name: Upload JUnit report for CourseTime
