@@ -367,17 +367,7 @@
 		},
 		{
 			"key": "url",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "token",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "url",
-			"value": "",
+			"value": "api.staging.futurx.in/api",
 			"type": "string"
 		},
 		{
