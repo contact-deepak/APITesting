@@ -22,37 +22,38 @@ jobs:
           node-version: '18'
 
       - name: Install Newman
-        run: npm install -g newman newman-reporter-html newman-reporter-junit
+        run: npm install -g newman 
 
-      - name: Run Postman collection with report for CourseTime
+      - name: Run Postman collection with report 
         # Continue even if the newman command fails (test failures)
         env:
           POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
         run: |
-          newman run CourseTime.json \
+          newman run CourseTime.json --reporters cli,junit \
           --env-var "token=$POSTMAN_TOKEN" \
-          --reporter-html-export ./CourseTimereport.html
+          --reporter-junit-export newman-report.xml
           ls -la
         continue-on-error: true  
 
       - name: Upload JUnit report for CourseTime
         uses: actions/upload-artifact@v3
         with:
-          name: html-report-coursetime
-          path: CourseTimereport.html
+          name: newman-report
+          path: newman-report.xml
           
-      - name: Run Postman collection with report for CourseType
+      - name: Run Postman collection with report 
         # Continue even if the newman command fails (test failures)
         env:
           POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
         run: |
-          newman run CourseType.json \
+          newman run CourseType.json --reporters cli,junit \
           --env-var "token=$POSTMAN_TOKEN" \
-          --reporter-junit-export ./CourseTypereport.xml
-        continue-on-error: true    
+          --reporter-junit-export newman-report1.xml
+          ls -la
+        continue-on-error: true  
 
-      - name: Upload JUnit report for CourseType
+      - name: Upload JUnit report for CourseTime
         uses: actions/upload-artifact@v3
         with:
-          name: junit-report-coursetype
-          path: CourseTypereport.xml
+          name: newman-report1
+          path: newman-report1.xml
