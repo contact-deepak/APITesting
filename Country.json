@@ -365,7 +365,7 @@
 	"variable": [
 		{
 			"key": "id",
-			"value": "-",
+			"value": "",
 			"type": "string"
 		},
 		{
@@ -391,7 +391,7 @@
 		},
 		{
 			"key": "url",
-			"value": "",
+			"value": "api.staging.futurx.in/api",
 			"type": "string"
 		}
 	]
