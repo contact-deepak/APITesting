@@ -30,8 +30,19 @@ jobs:
           --reporter-junit-export newman-report.xml
         continue-on-error: true  
 
-      - name: Upload Newman report
+      - name: Convert HTML report to PDF
+        run: |
+          npx puppeteer --eval "const puppeteer = require('puppeteer'); \
+          (async () => { \
+            const browser = await puppeteer.launch(); \
+            const page = await browser.newPage(); \
+            await page.goto('file://' + process.cwd() + '/newman-report.html'); \
+            await page.pdf({ path: 'newman-report.pdf', format: 'A4' }); \
+            await browser.close(); \
+          })();"
+
+      - name: Upload Newman PDF report
         uses: actions/upload-artifact@v3
         with:
           name: newman-report
-          path: newman-report.xml
+          path: newman-report.pdf
