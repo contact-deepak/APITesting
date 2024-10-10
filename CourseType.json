@@ -43,9 +43,9 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/course-types?limit=10",
+					"raw": "https://{{url}}/course-types?limit=10",
 					"host": [
-						"{{url}}"
+						"https://{{url}}/api"
 					],
 					"path": [
 						"course-types"
