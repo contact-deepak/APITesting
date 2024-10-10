@@ -19,40 +19,39 @@ jobs:
       - name: Install Node.js (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '18' 
+          node-version: '18'
 
       - name: Install Newman
         run: npm install -g newman 
 
-      - name: Run Postman collection with report
+      - name: Run Postman collection with report for CourseTime
         # Continue even if the newman command fails (test failures)
         env:
-          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # This injects the secret token
+          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
         run: |
           newman run CourseTime.json \
           --env-var "token=$POSTMAN_TOKEN" \
           --reporter-junit-export ./CourseTimereport.xml
         continue-on-error: true  
 
-      - name: Upload JUnit report
+      - name: Upload JUnit report for CourseTime
         uses: actions/upload-artifact@v3
         with:
-          name: junit-report
+          name: junit-report-coursetime
           path: CourseTimereport.xml
           
-      - name: Run Postman collection with report
+      - name: Run Postman collection with report for CourseType
         # Continue even if the newman command fails (test failures)
         env:
-          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # This injects the secret token
+          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
         run: |
           newman run CourseType.json \
           --env-var "token=$POSTMAN_TOKEN" \
           --reporter-junit-export ./CourseTypereport.xml
         continue-on-error: true    
 
-      - name: Upload JUnit report
+      - name: Upload JUnit report for CourseType
         uses: actions/upload-artifact@v3
         with:
-          name: junit-report
+          name: junit-report-coursetype
           path: CourseTypereport.xml
-             
