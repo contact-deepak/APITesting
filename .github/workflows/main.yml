@@ -24,40 +24,53 @@ jobs:
       - name: Install Newman
         run: npm install -g newman 
 
-      - name: Run Postman collection and upload report
-        env:
-          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
-        run: |
-          # Run the Postman collection
-          newman run Country.json --reporters cli,junit \
-          --env-var "token=$POSTMAN_TOKEN" \
-          --reporter-junit-export Country.xml
-          
-          # List the files to check that the report was generated
-          ls -la
-
-          # Upload the generated report
-          if [ -f Country.xml ]; then
-            echo "Uploading report..."
-            actions/upload-artifact@v3 --name Country --path Country.xml
-          else
-            echo "Report not found!"
-          fi
-        continue-on-error: true
-          
-      - name: Run Postman collection with report 
+      - name: AdmissionCriteria
         # Continue even if the newman command fails (test failures)
         env:
-          POSTMAN_TOKEN: ${{ secrets.POSTMAN_TOKEN }} # Inject secret token
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+        run: |
+          newman run AdmissionCriteria.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export AdmissionCriteria.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for AdmissionCriteria
+        uses: actions/upload-artifact@v3
+        with:
+          name: AdmissionCriteria
+          path: AdmissionCriteria.xml
+          
+      - name: Country
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+        run: |
+          newman run Country.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Country.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Country
+        uses: actions/upload-artifact@v3
+        with:
+          name: Country
+          path: Country.xml
+
+      - name: CourseTime
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
         run: |
           newman run CourseTime.json --reporters cli,junit \
-          --env-var "token=$POSTMAN_TOKEN" \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
           --reporter-junit-export CourseTime.xml
-          ls -la
         continue-on-error: true  
 
       - name: Upload JUnit report for CourseTime
         uses: actions/upload-artifact@v3
         with:
           name: CourseTime
-          path: CourseTime.xml
+          path: CourseTime.xml    
