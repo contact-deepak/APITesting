@@ -28,6 +28,7 @@ jobs:
         # Continue even if the newman command fails (test failures)
         env:
           TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
         run: |
           newman run AdmissionCriteria.json --reporters cli,junit \
           --env-var "url=$URL" \
@@ -45,6 +46,7 @@ jobs:
         # Continue even if the newman command fails (test failures)
         env:
           TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
         run: |
           newman run Country.json --reporters cli,junit \
           --env-var "url=$URL" \
@@ -62,6 +64,7 @@ jobs:
         # Continue even if the newman command fails (test failures)
         env:
           TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
         run: |
           newman run CourseTime.json --reporters cli,junit \
           --env-var "url=$URL" \
