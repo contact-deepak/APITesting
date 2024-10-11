@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "47e3ec58-3a16-407a-90ea-638dcc7c166c",
+		"name": "LoanProvider",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36805930",
+		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-47e3ec58-3a16-407a-90ea-638dcc7c166c?action=share&source=collection_link&creator=36805930"
+	},
+	"item": [
+		{
+			"name": "All loan provider",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/loan-providers?limit=100",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loan-providers"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new loan provider",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data._id);   \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"logo\", jsonData.data.logo);\r",
+							"pm.collectionVariables.set(\"description\", jsonData.data.description);\r",
+							"pm.collectionVariables.set(\"website\", jsonData.data.website);\r",
+							"pm.collectionVariables.set(\"email\", jsonData.data.email);\r",
+							"pm.collectionVariables.set(\"phone\", jsonData.data.phone);\r",
+							"\r",
+							"pm.test(\"Loan provider added succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Loan provider added succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"State bank of India\",\r\n  \"logo\": \"66a3bfde7a95f76875ed973d\",\r\n  \"description\": \"No 1 Bank\",\r\n  \"website\": \"www.sbi.com\",\r\n  \"email\": \"sbi@gmail.com\",\r\n  \"phone\": \"9876543210\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/loan-providers",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://compapi.makvishan.com/api/loan-providers' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"name\": \"string\",\r\n  \"logo\": \"string\",\r\n  \"description\": \"string\",\r\n  \"website\": \"string\",\r\n  \"email\": \"string\",\r\n  \"phone\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get loan provider by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Loan provider Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.logo).to.eql(pm.collectionVariables.get(\"logo\"));\r",
+							"    pm.expect(jsonData.data.description).to.eql(pm.collectionVariables.get(\"description\"));\r",
+							"    pm.expect(jsonData.data.website).to.eql(pm.collectionVariables.get(\"website\"));\r",
+							"    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get(\"email\"));\r",
+							"    pm.expect(jsonData.data.phone).to.eql(pm.collectionVariables.get(\"phone\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/loan-providers/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/loan-providers/668bd577a24189ffa5ff5007' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a loan provider",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();   \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"logo\", jsonData.data.logo);\r",
+							"pm.collectionVariables.set(\"description\", jsonData.data.description);\r",
+							"pm.collectionVariables.set(\"website\", jsonData.data.website);\r",
+							"pm.collectionVariables.set(\"email\", jsonData.data.email);\r",
+							"pm.collectionVariables.set(\"phone\", jsonData.data.phone);\r",
+							"\r",
+							"pm.test(\"Loan provider updated successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eq(\"Loan provider updated successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"phone\": \"8899774455\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/loan-providers/{{id}}",
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://compapi.makvishan.com/api/loan-providers/oo' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"name\": \"string\",\r\n  \"logo\": \"string\",\r\n  \"description\": \"string\",\r\n  \"website\": \"string\",\r\n  \"email\": \"string\",\r\n  \"phone\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get loan provider by id After Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Loan provider Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.logo).to.eql(pm.collectionVariables.get(\"logo\"));\r",
+							"    pm.expect(jsonData.data.description).to.eql(pm.collectionVariables.get(\"description\"));\r",
+							"    pm.expect(jsonData.data.website).to.eql(pm.collectionVariables.get(\"website\"));\r",
+							"    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get(\"email\"));\r",
+							"    pm.expect(jsonData.data.phone).to.eql(pm.collectionVariables.get(\"phone\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/loan-providers/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/loan-providers/668bd577a24189ffa5ff5007' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete loan proider by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Loan provider deleted successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Loan provider deleted successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "https://{{url}}/loan-providers/{{id}}",
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://compapi.makvishan.com/api/loan-providers/668bd1b0a2' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get loan provider by id After Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Loan Provider deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.isActive).to.eql(false);  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/loan-providers/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/loan-providers/668bd577a24189ffa5ff5007' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "logo",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "website",
+			"value": ""
+		},
+		{
+			"key": "phone",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

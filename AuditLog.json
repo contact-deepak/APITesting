@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "dfcf1f70-98c0-4a97-b556-40c1bc6084ca",
+		"name": "AuditLog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36805930",
+		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-dfcf1f70-98c0-4a97-b556-40c1bc6084ca?action=share&source=collection_link&creator=36805930"
+	},
+	"item": [
+		{
+			"name": "All audit log",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/audit-logs?limit=100",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"audit-logs"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "100"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/audit-logs?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new audit log",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data._id);   \r",
+							"pm.collectionVariables.set(\"title\", jsonData.data.title);\r",
+							"pm.collectionVariables.set(\"type\", jsonData.data.type);\r",
+							"pm.collectionVariables.set(\"someData\", jsonData.data.data.someData);\r",
+							"\r",
+							"pm.test(\"Audit log added succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Audit log added succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"abc\",\r\n  \"type\": \"bc\",\r\n  \"data\": {\r\n    \"someData\": \"how\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/audit-logs",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://compapi.makvishan.com/api/audit-logs' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"title\": \"string\",\r\n  \"type\": \"string\",\r\n  \"data\": {\r\n    \"someData\": \"string\"\r\n  }\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get audit log by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Audit log Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.title).to.eql(pm.collectionVariables.get(\"title\"));\r",
+							"    pm.expect(jsonData.data.type).to.eql(pm.collectionVariables.get(\"type\"));\r",
+							"    pm.expect(jsonData.data.data.somedata).to.eql(pm.collectionVariables.get(\"somedata\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/audit-logs/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/audit-logs/668ccad7a24189ffa5ff6764' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update audit log by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();   \r",
+							"pm.collectionVariables.set(\"title\", jsonData.data.title);\r",
+							"pm.collectionVariables.set(\"type\", jsonData.data.type);\r",
+							"pm.collectionVariables.set(\"someData\", jsonData.data.data.someData);\r",
+							"\r",
+							"pm.test(\"Audit log updated successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eq(\"Audit log updated successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"123\",\r\n  \"type\": \"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/audit-logs/{{id}}",
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://compapi.makvishan.com/api/audit-logs/668ccad7a24189ffa5ff6764' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"title\": \"string\",\r\n  \"type\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get audit log by id After update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Audit log Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.title).to.eql(pm.collectionVariables.get(\"title\"));\r",
+							"    pm.expect(jsonData.data.type).to.eql(pm.collectionVariables.get(\"type\"));\r",
+							"    pm.expect(jsonData.data.data.somedata).to.eql(pm.collectionVariables.get(\"somedata\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/audit-logs/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/audit-logs/668ccad7a24189ffa5ff6764' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete audit log by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Audit log deleted successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Audit log deleted successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "https://{{url}}/audit-logs/{{id}}",
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://compapi.makvishan.com/api/audit-logs/668ccad7a24189ffa5ff6764' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get audit log by id After Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Audit log deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.isActive).to.eql(false);  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/audit-logs/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/audit-logs/668ccad7a24189ffa5ff6764' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "title",
+			"value": ""
+		},
+		{
+			"key": "type",
+			"value": ""
+		},
+		{
+			"key": "someData",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
