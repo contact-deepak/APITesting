@@ -76,4 +76,148 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: CourseTime
-          path: CourseTime.xml    
+          path: CourseTime.xml   
+
+      - name: CourseType
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run CourseType.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export CourseType.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for CourseType
+        uses: actions/upload-artifact@v3
+        with:
+          name: CourseType
+          path: CourseType.xml  
+
+      - name: Currency
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Currency.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Currency.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Currency
+        uses: actions/upload-artifact@v3
+        with:
+          name: Currency
+          path: Currency.xml     
+
+      - name: Department
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Department.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Department.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Department
+        uses: actions/upload-artifact@v3
+        with:
+          name: Department
+          path: Department.xml    
+
+      - name: Facility
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Facility.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Facility.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Facility
+        uses: actions/upload-artifact@v3
+        with:
+          name: Facility
+          path: Facility.xml    
+
+      - name: JobRole
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run JobRole.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export JobRole.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for JobRole
+        uses: actions/upload-artifact@v3
+        with:
+          name: JobRole
+          path: JobRole.xml    
+
+      - name: Rank
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Rank.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Rank.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Rank
+        uses: actions/upload-artifact@v3
+        with:
+          name: Rank
+          path: Rank.xml    
+
+      - name: Shortlists
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Shortlists.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Shortlists.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Shortlists
+        uses: actions/upload-artifact@v3
+        with:
+          name: Shortlists
+          path: Shortlists.xml    
+
+      - name: TestScore
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run TestScore.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export TestScore.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for TestScore
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestScore
+          path: TestScore.xml    
