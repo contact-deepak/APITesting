@@ -41,6 +41,24 @@ jobs:
         with:
           name: AdmissionCriteria
           path: AdmissionCriteria.xml
+
+      - name: AuditLog
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run AuditLog.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export AuditLog.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for AuditLog
+        uses: actions/upload-artifact@v3
+        with:
+          name: AuditLog
+          path: AuditLog.xml    
           
       - name: Country
         # Continue even if the newman command fails (test failures)
@@ -166,7 +184,25 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: JobRole
-          path: JobRole.xml    
+          path: JobRole.xml  
+
+      - name: LoanProvider
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run LoanProvider.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export LoanProvider.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for LoanProvider
+        uses: actions/upload-artifact@v3
+        with:
+          name: LoanProvider
+          path: LoanProvider.xml    
 
       - name: Rank
         # Continue even if the newman command fails (test failures)
