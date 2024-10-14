@@ -114,23 +114,23 @@ jobs:
           name: CourseType
           path: CourseType.xml  
 
-      - name: Coursebycollege
+      - name: Coursesbycollege
         # Continue even if the newman command fails (test failures)
         env:
           TOKEN: ${{ secrets.TOKEN }} # Inject secret token
           URL: ${{ secrets.URL }}
         run: |
-          newman run Coursebycollege.json --reporters cli,junit \
+          newman run Coursesbycollege.json --reporters cli,junit \
           --env-var "url=$URL" \
           --env-var "token=$TOKEN" \
-          --reporter-junit-export Coursebycollege.xml
+          --reporter-junit-export Coursesbycollege.xml
         continue-on-error: true  
 
-      - name: Upload JUnit report for Coursebycollege
+      - name: Upload JUnit report for Coursesbycollege
         uses: actions/upload-artifact@v3
         with:
-          name: Coursebycollege
-          path: Coursebycollege.xml    
+          name: Coursesbycollege
+          path: Coursesbycollege.xml    
 
       - name: Currency
         # Continue even if the newman command fails (test failures)
