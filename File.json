@@ -406,7 +406,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/deepa/Pictures/Screenshots/Screenshot (170).png"
+							"src": "/img/logo1.png"
 						}
 					]
 				},
@@ -503,8 +503,8 @@
 							"key": "files",
 							"type": "file",
 							"src": [
-								"/C:/Users/deepa/Pictures/Screenshots/Screenshot (170).png",
-								"/C:/Users/deepa/Pictures/Screenshots/Screenshot (171).png"
+								"/img/logo1.png",
+								"/img/logo2.png"
 							]
 						}
 					]
