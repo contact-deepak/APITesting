@@ -1,0 +1,613 @@
+{
+	"info": {
+		"_postman_id": "28202810-8ef9-41c2-92c4-0b84ac38ed7d",
+		"name": "File",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36805930",
+		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-28202810-8ef9-41c2-92c4-0b84ac38ed7d?action=share&source=collection_link&creator=36805930"
+	},
+	"item": [
+		{
+			"name": "All files",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/files?limit=10",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"files"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://13.200.161.228:4000/api/files?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data._id);   \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"originalName\", jsonData.data.originalName);\r",
+							"pm.collectionVariables.set(\"storage\", jsonData.data.storage);\r",
+							"pm.collectionVariables.set(\"link\", jsonData.data.url);\r",
+							"pm.collectionVariables.set(\"mimetype\", jsonData.data.mimetype);\r",
+							"pm.collectionVariables.set(\"size\", jsonData.data.size);\r",
+							"pm.collectionVariables.set(\"encoding\", jsonData.data.encoding);\r",
+							"pm.collectionVariables.set(\"etag\", jsonData.data.etag);\r",
+							"pm.collectionVariables.set(\"folder\", jsonData.data.folder);\r",
+							"\r",
+							"pm.test(\"File added succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"File added succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"string\",\r\n  \"originalName\": \"string\",\r\n  \"storage\": \"string\",\r\n  \"url\": \"string\",\r\n  \"mimetype\": \"string\",\r\n  \"size\": 20,\r\n  \"encoding\": \"string\",\r\n  \"etag\": \"string\",\r\n  \"folder\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/files",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://compapi.makvishan.com/api/files' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"name\": \"string\",\r\n  \"originalName\": \"string\",\r\n  \"storage\": \"string\",\r\n  \"url\": \"string\",\r\n  \"mimetype\": \"string\",\r\n  \"size\": 0,\r\n  \"encoding\": \"string\",\r\n  \"etag\": \"string\",\r\n  \"folder\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get file by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.originalName).to.eql(pm.collectionVariables.get(\"originalName\"));\r",
+							"    pm.expect(jsonData.data.storage).to.eql(pm.collectionVariables.get(\"storage\"));\r",
+							"    pm.expect(jsonData.data.url).to.eql(pm.collectionVariables.get(\"link\"));\r",
+							"    pm.expect(jsonData.data.mimetype).to.eql(pm.collectionVariables.get(\"mimetype\"));\r",
+							"    pm.expect(jsonData.data.size).to.eql(pm.collectionVariables.get(\"size\"));\r",
+							"    pm.expect(jsonData.data.encoding).to.eql(pm.collectionVariables.get(\"encoding\"));\r",
+							"    pm.expect(jsonData.data.etag).to.eql(pm.collectionVariables.get(\"etag\"));\r",
+							"    pm.expect(jsonData.data.folder).to.eql(pm.collectionVariables.get(\"folder\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/files/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/files/668cdcb4a24189ffa5ff67d4' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a file by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();   \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"originalName\", jsonData.data.originalName);\r",
+							"pm.collectionVariables.set(\"storage\", jsonData.data.storage);\r",
+							"pm.collectionVariables.set(\"link\", jsonData.data.url);\r",
+							"pm.collectionVariables.set(\"mimetype\", jsonData.data.mimetype);\r",
+							"pm.collectionVariables.set(\"size\", jsonData.data.size);\r",
+							"pm.collectionVariables.set(\"encoding\", jsonData.data.encoding);\r",
+							"pm.collectionVariables.set(\"etag\", jsonData.data.etag);\r",
+							"pm.collectionVariables.set(\"folder\", jsonData.data.folder);\r",
+							"\r",
+							"pm.test(\"File updated successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eq(\"File updated successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jack\",\r\n      \"size\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/files/{{id}}",
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://compapi.makvishan.com/api/files/668cdcb4a24189ffa5ff67d4' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get file by id After update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.originalName).to.eql(pm.collectionVariables.get(\"originalName\"));\r",
+							"    pm.expect(jsonData.data.storage).to.eql(pm.collectionVariables.get(\"storage\"));\r",
+							"    pm.expect(jsonData.data.url).to.eql(pm.collectionVariables.get(\"link\"));\r",
+							"    pm.expect(jsonData.data.mimetype).to.eql(pm.collectionVariables.get(\"mimetype\"));\r",
+							"    pm.expect(jsonData.data.size).to.eql(pm.collectionVariables.get(\"size\"));\r",
+							"    pm.expect(jsonData.data.encoding).to.eql(pm.collectionVariables.get(\"encoding\"));\r",
+							"    pm.expect(jsonData.data.etag).to.eql(pm.collectionVariables.get(\"etag\"));\r",
+							"    pm.expect(jsonData.data.folder).to.eql(pm.collectionVariables.get(\"folder\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/files/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/files/668cdcb4a24189ffa5ff67d4' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete file by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File deleted successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"File deleted successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "https://{{url}}/files/{{id}}",
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://compapi.makvishan.com/api/files/668cdcb4a24189ffa5ff67d4' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get file by id After Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"File deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.isActive).to.eql(false);  \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/files/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/files/668cdcb4a24189ffa5ff67d4' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "file upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id1\", jsonData.data._id);   \r",
+							"\r",
+							"pm.test(\"File uploaded succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"File uploaded succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/deepa/Pictures/Screenshots/Screenshot (170).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{url}}/files/upload",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"files",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read file id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/files/read/{{id1}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://13.200.161.228:4000/api/files?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Mulit file upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Files uploaded succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Files uploaded successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": [
+								"/C:/Users/deepa/Pictures/Screenshots/Screenshot (170).png",
+								"/C:/Users/deepa/Pictures/Screenshots/Screenshot (171).png"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{url}}/files/upload/multi",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"files",
+						"upload",
+						"multi"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "originalName",
+			"value": ""
+		},
+		{
+			"key": "storage",
+			"value": ""
+		},
+		{
+			"key": "link",
+			"value": ""
+		},
+		{
+			"key": "mimetype",
+			"value": ""
+		},
+		{
+			"key": "size",
+			"value": ""
+		},
+		{
+			"key": "encoding",
+			"value": ""
+		},
+		{
+			"key": "etag",
+			"value": ""
+		},
+		{
+			"key": "folder",
+			"value": ""
+		},
+		{
+			"key": "id1",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
