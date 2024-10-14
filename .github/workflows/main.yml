@@ -168,6 +168,24 @@ jobs:
           name: Facility
           path: Facility.xml    
 
+      - name: File
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run File.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export File.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for File
+        uses: actions/upload-artifact@v3
+        with:
+          name: File
+          path: File.xml    
+
       - name: JobRole
         # Continue even if the newman command fails (test failures)
         env:
