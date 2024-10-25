@@ -1,0 +1,727 @@
+{
+	"info": {
+		"_postman_id": "049ec454-c474-4d51-bdb1-d8228592d1d2",
+		"name": "Colleges",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36805930",
+		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-049ec454-c474-4d51-bdb1-d8228592d1d2?action=share&source=collection_link&creator=36805930"
+	},
+	"item": [
+		{
+			"name": "All colleges",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/colleges?limit=10&populate=logo,currency,country",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"colleges"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "populate",
+							"value": "logo,currency,country"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/colleges?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new college",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data._id);   \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"currency\", jsonData.data.currency);\r",
+							"pm.collectionVariables.set(\"country\", jsonData.data.country);\r",
+							"\r",
+							"pm.test(\"College added succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"College added succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Tech University\",\r\n\"unitId\": \"TU003\",\r\n\"type\": \"Private\",\r\n\"logo\": \"634d6bc9d0f9e3f9b6cf4567\",\r\n\"banner\": \"634d6bc9d0f9e3f9b6cf4568\",\r\n\"globalRank\": \"50\",\r\n\"currency\": \"634d6bc9d0f9e3f9b6cf4569\",\r\n\"country\": \"634d6bc9d0f9e3f9b6cf4570\",\r\n\"cost\": {\r\n\"onCampusLiving\": 12000,\r\n\"offCampusLiving\": 10000\r\n},\r\n\"avgCostOfLiving\": 11000,\r\n\"avgTutionFee\": 20000,\r\n\"avgCourseFee\": 15000,\r\n\"avgAdmissionRate\": 85,\r\n\"avgTimeToApply\": [\"4 weeks\", \"6 weeks\"],\r\n\"applicationDeadLine\": \"2024-12-31\",\r\n\"chancesForJob\": 90,\r\n\"aboutContent\": \"Tech University offers top-notch engineering and technology programs.\",\r\n\"howToApplyContent\": \"Submit your application online along with necessary documents.\",\r\n\"placementContent\": \"The university has a placement rate of 90%.\",\r\n\"studentsFeedback\": [\r\n{\r\n\"name\": \"John Doe\",\r\n\"location\": \"New York\",\r\n\"content\": \"The university has excellent facilities and great professors.\",\r\n\"photo\": \"https://example.com/john_photo.jpg\"\r\n}\r\n],\r\n\"eligibility\": [\r\n{\r\n\"logo\": \"634d6bc9d0f9e3f9b6cf4575\",\r\n\"title\": \"GRE\",\r\n\"description\": \"GRE is required for MS programs.\",\r\n\"score\": \"300\"\r\n}\r\n],\r\n\"images\": [\"634d6bc9d0f9e3f9b6cf4571\", \"634d6bc9d0f9e3f9b6cf4572\"],\r\n\"admissionCriteria\": [\"634d6bc9d0f9e3f9b6cf4573\"],\r\n\"history\": \"Founded in 1990, the university has grown rapidly over the years.\",\r\n\"loanProviders\": [\"634d6bc9d0f9e3f9b6cf4574\"],\r\n\"contactInformation\": {\r\n\"address\": \"123 Main St, Tech City, USA\",\r\n\"phone\": \"+1-234-567-8901\",\r\n\"email\": \"info@techuniversity.edu\",\r\n\"website\": \"https://www.techuniversity.edu\",\r\n\"latitude\": \"40.7128\",\r\n\"longitude\": \"-74.0060\"\r\n},\r\n\"socialMediaLinks\": {\r\n\"facebook\": \"https://facebook.com/techuniversity\",\r\n\"twitter\": \"https://twitter.com/techuniversity\",\r\n\"linkedin\": \"https://linkedin.com/school/techuniversity\",\r\n\"instagram\": \"https://instagram.com/techuniversity\"\r\n},\r\n\"rankings\": [\r\n{\r\n\"rank\": \"634d6bc9d0f9e3f9b6cf4576\",\r\n\"rankValue\": 50\r\n}\r\n],\r\n\"testScore\": [\r\n{ \"test\": \"634d6bc9d0f9e3f9b6cf4577\",\r\n\"requiredScore\": \"300\",\r\n\"totalScore\": \"340\"\r\n}\r\n],\r\n\"established\": 1990,\r\n\"applicationFee\": 50,\r\n\"isPromoted\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/colleges",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://13.200.161.228:4000/api/colleges' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"name\": \"string\",\r\n  \"unitId\": \"string\",\r\n  \"type\": \"Private\",\r\n  \"logo\": \"string\",\r\n  \"banner\": \"string\",\r\n  \"globalRank\": \"string\",\r\n  \"currency\": \"string\",\r\n  \"country\": \"string\",\r\n  \"cost\": {\r\n    \"onCampusLiving\": 0,\r\n    \"offCampusLiving\": 0\r\n  },\r\n  \"avgCostOfLiving\": 0,\r\n  \"avgTutionFee\": 0,\r\n  \"avgCourseFee\": 0,\r\n  \"avgAdmissionRate\": 0,\r\n  \"applicationDeadLine\": \"2024-08-07\",\r\n  \"avgTimeToApply\": [\r\n    \"string\"\r\n  ],\r\n  \"chancesForJob\": 0,\r\n  \"aboutContent\": \"string\",\r\n  \"howToApplyContent\": \"string\",\r\n  \"placementContent\": \"string\",\r\n  \"studentsFeedback\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"location\": \"string\",\r\n      \"content\": \"string\",\r\n      \"photo\": \"string\"\r\n    }\r\n  ],\r\n  \"eligibility\": {\r\n    \"logo\": \"string\",\r\n    \"title\": \"string\",\r\n    \"description\": \"string\",\r\n    \"score\": \"string\"\r\n  },\r\n  \"images\": [\r\n    \"string\"\r\n  ],\r\n  \"admissionCriteria\": [\r\n    \"string\"\r\n  ],\r\n  \"history\": \"string\",\r\n  \"loanProviders\": [\r\n    \"string\"\r\n  ],\r\n  \"contactInformation\": {\r\n    \"address\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"email\": \"string\",\r\n    \"website\": \"string\",\r\n    \"latitude\": \"string\",\r\n    \"longitude\": \"string\"\r\n  },\r\n  \"socialMediaLinks\": {\r\n    \"facebook\": \"string\",\r\n    \"twitter\": \"string\",\r\n    \"linkedin\": \"string\",\r\n    \"instagram\": \"string\"\r\n  },\r\n  \"rankings\": [\r\n    {\r\n      \"rank\": \"string\",\r\n      \"rankValue\": 0\r\n    }\r\n  ],\r\n  \"testScore\": [\r\n    {\r\n      \"test\": \"string\",\r\n      \"requiredScore\": \"string\",\r\n      \"totalScore\": \"string\"\r\n    }\r\n  ],\r\n  \"established\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get college by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"College Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.currency).to.eql(pm.collectionVariables.get(\"currency\"));\r",
+							"    pm.expect(jsonData.data.country).to.eql(pm.collectionVariables.get(\"country\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/colleges/{{id}}?populate=logo",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"colleges",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "populate",
+							"value": "logo"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/colleges/6687bbc0eea4925c2398585b' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a college by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json(); \r",
+							"pm.collectionVariables.set(\"name\", jsonData.data.name);\r",
+							"pm.collectionVariables.set(\"currency\", jsonData.data.currency);\r",
+							"pm.collectionVariables.set(\"country\", jsonData.data.country);\r",
+							"\r",
+							"pm.test(\"College updated successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eq(\"College updated successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tech University 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/colleges/{{id}}",
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://compapi.makvishan.com/api/colleges/6687bbc0eea4925c2398585b' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"name\": \"string\",\r\n  \"type\": \"College\",\r\n  \"logo\": \"string\",\r\n  \"parent\": \"string\",\r\n  \"globalRank\": \"string\",\r\n  \"inTake\": [\r\n    \"Fall\"\r\n  ],\r\n  \"currency\": \"string\",\r\n  \"country\": \"string\",\r\n  \"cost\": {\r\n    \"onCampusLiving\": 0,\r\n    \"offCampusLiving\": 0\r\n  },\r\n  \"aboutContent\": \"string\",\r\n  \"howToApplyContent\": \"string\",\r\n  \"placement\": {\r\n    \"content\": \"string\",\r\n    \"year\": 0,\r\n    \"placementRate\": 0,\r\n    \"averageSalary\": 0,\r\n    \"topCompanies\": [\r\n      \"string\"\r\n    ]\r\n  },\r\n  \"studentsFeedback\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"location\": \"string\",\r\n      \"content\": \"string\",\r\n      \"photo\": \"string\"\r\n    }\r\n  ],\r\n  \"images\": [\r\n    \"string\"\r\n  ],\r\n  \"affiliation\": \"string\",\r\n  \"departments\": [\r\n    \"string\"\r\n  ],\r\n  \"accreditations\": [\r\n    {\r\n      \"title\": \"string\"\r\n    }\r\n  ],\r\n  \"facilities\": [\r\n    \"string\"\r\n  ],\r\n  \"faculty\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"qualification\": \"string\",\r\n      \"expertise\": [\r\n        \"string\"\r\n      ]\r\n    }\r\n  ],\r\n  \"admissionCriteria\": [\r\n    {}\r\n  ],\r\n  \"history\": \"string\",\r\n  \"loanProviders\": [\r\n    \"string\"\r\n  ],\r\n  \"missionVision\": \"string\",\r\n  \"contactInformation\": {\r\n    \"address\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"email\": \"string\",\r\n    \"website\": \"string\",\r\n    \"latitude\": \"string\",\r\n    \"longitude\": \"string\"\r\n  },\r\n  \"socialMediaLinks\": {\r\n    \"facebook\": \"string\",\r\n    \"twitter\": \"string\",\r\n    \"linkedin\": \"string\",\r\n    \"instagram\": \"string\"\r\n  },\r\n  \"rankings\": [\r\n    {\r\n      \"year\": 0,\r\n      \"rank\": 0,\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"established\": 0,\r\n  \"createdAt\": \"2024-07-09T11:28:54.997Z\",\r\n  \"createdBy\": \"string\",\r\n  \"updatedAt\": \"2024-07-09T11:28:54.997Z\",\r\n  \"updatedBy\": \"string\",\r\n  \"isActive\": true\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get college by id After update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"College Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.collectionVariables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.currency).to.eql(pm.collectionVariables.get(\"currency\"));\r",
+							"    pm.expect(jsonData.data.country).to.eql(pm.collectionVariables.get(\"country\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/colleges/{{id}}?populate=logo",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"colleges",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "populate",
+							"value": "logo"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/colleges/6687bbc0eea4925c2398585b' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a college",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"College deleted successfully \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"College deleted successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": "https://{{url}}/colleges/{{id}}",
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://compapi.makvishan.com/api/colleges/6687bbc0eea4925c2398585b' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get college by id After Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"College deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"College not found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/colleges/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://compapi.makvishan.com/api/colleges/6687bbc0eea4925c2398585b' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "All promoted colleges",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/colleges/promoted",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.staging.futurx.in/api/colleges/promoted?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get colleges based on filters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJfWDhpazY4Q0VVdlk2NkxxV09rS0Y2ZkVLY1E3anc2bCIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk3OTkzM30.5hN-Y-h0m39abIQdeqwOTHKjwMBzxJl9Dk8JbqcCRuo"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"countries\": [\r\n    \"india\"\r\n  ],\r\n  \"degree\": \"bachelor\",\r\n  \"domicile\": \"international\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/colleges/saferate",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://api.staging.futurx.in/api/colleges/saferate' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJfWDhpazY4Q0VVdlk2NkxxV09rS0Y2ZkVLY1E3anc2bCIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk3OTkzM30.5hN-Y-h0m39abIQdeqwOTHKjwMBzxJl9Dk8JbqcCRuo' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"countries\": [\r\n    \"string\"\r\n  ],\r\n  \"degree\": \"bachelor\",\r\n  \"domicile\": \"international\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get college by unitid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/colleges/algolia/100654",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://13.200.161.228:4000/api/colleges/algolia/100654' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Search college from algolia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"searchTerm\": \"athens\",\r\n  \"trim\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/colleges/algolia/search",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://13.200.161.228:4000/api/colleges/algolia/search' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"searchTerm\": \"athens\",\r\n  \"trim\": true\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Search colleges",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"College Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"degree\": \"66a9c08222b0192416118750\",\r\n  \"courses\": [\r\n    \"66ab3513512f0764199c0b20\"\r\n  ],\r\n  \"searchTerm\": \"anna\",\r\n  \"countries\": [\r\n    \"coundryId1\",\r\n    \"coundryId2\"\r\n  ],\r\n  \"tutionFee\": {\r\n    \"min\": 10000,\r\n    \"max\": 50000\r\n  },\r\n  \"limit\": 10,\r\n  \"skip\": 0,\r\n  \"select\": \"name,country\",\r\n  \"populate\": \"departments\",\r\n  \"sort\": \"{name:-1}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/colleges/search",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://13.200.161.228:4000/api/colleges/search' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"degree\": \"degreeId1\",\r\n  \"courses\": [\r\n    \"courseId1\",\r\n    \"courseId2\"\r\n  ],\r\n  \"searchTerm\": \"Engineering\",\r\n  \"countries\": [\r\n    \"coundryId1\",\r\n    \"coundryId2\"\r\n  ],\r\n  \"tutionFee\": {\r\n    \"min\": 10000,\r\n    \"max\": 50000\r\n  },\r\n  \"limit\": 10,\r\n  \"skip\": 0,\r\n  \"select\": \"name,country\",\r\n  \"populate\": \"departments\",\r\n  \"sort\": \"{name:-1}\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create college using json upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/deepa/Downloads/colleges (3).json"
+						}
+					]
+				},
+				"url": "https://{{url}}/colleges/json/upload",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://13.200.161.228:4000/api/colleges/json/upload' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: multipart/form-data' \\\r\n  -F 'file='"
+			},
+			"response": []
+		},
+		{
+			"name": "Get progress of json upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/colleges/json/upload-progress",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://13.200.161.228:4000/api/colleges/json/upload-progress' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "currency",
+			"value": ""
+		},
+		{
+			"key": "country",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

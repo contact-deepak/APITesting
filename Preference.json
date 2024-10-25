@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "1c8b8378-1375-46c6-b6c9-064da180f361",
+		"name": "Preference",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36805930",
+		"_collection_link": "https://futurx.postman.co/workspace/FuturX~fc1c2785-17f2-422c-8b49-9a1839c7b4a0/collection/36805930-1c8b8378-1375-46c6-b6c9-064da180f361?action=share&source=collection_link&creator=36805930"
+	},
+	"item": [
+		{
+			"name": "All preferences",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/preferences?limit=10",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"preferences"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.staging.futurx.in/api/preferences?limit=10' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new preference",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data._id);   \r",
+							"pm.collectionVariables.set(\"user\", jsonData.data.user);\r",
+							"pm.collectionVariables.set(\"flow\", jsonData.data.flow);\r",
+							"pm.collectionVariables.set(\"email\", jsonData.data.email);\r",
+							"\r",
+							"pm.test(\"Preference added succesfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Preference added succesfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"user\": \"652bc82b9f1b3475d5e48858\",\r\n\"flow\": \"undergraduate-application\",\r\n\"currentStage\": \"completedadmintest\",\r\n\"country\": \"652bc82b9f1b3475d5e48859\",\r\n\"firstName\": \"John\",\r\n\"lastName\": \"Doe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"courseType\": \"652bc82b9f1b3475d5e48860\",\r\n\"courseOfInterest\": \"652bc82b9f1b3475d5e48861\",\r\n\"highestEducationLevel\": \"Bachelors\",\r\n\"board\": \"CBSE\",\r\n\"highestEducation\": \"Computer Science\",\r\n\"cgaScore\": \"3.8\",\r\n\"englishTest\": [\r\n{\r\n\"test\": \"652bc82b9f1b3475d5e48862\",\r\n\"score\": 7.5\r\n}\r\n],\r\n\"acdemicTest\": [\r\n{\r\n\"test\": \"652bc82b9f1b3475d5e48863\",\r\n\"score\": 1450\r\n}\r\n],\r\n\"startYear\": \"2024\",\r\n\"notDecidedYet\": false,\r\n\"loanType\": \"education\",\r\n\"budget\": {\r\n\"min\": 10000,\r\n\"max\": 30000\r\n},\r\n\"requiredLoanAmount\": {\r\n\"min\": 5000,\r\n\"max\": 20000\r\n},\r\n\"extraCurricularActivities\": \"Football, Music\",\r\n\"whatMatters\": {\r\n\"high\": [\"Quality Education\", \"International Exposure\"],\r\n\"medium\": [\"Location\", \"Community\"],\r\n\"low\": [\"Cost\"]\r\n}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/preferences",
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://api.staging.futurx.in/api/preferences' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n\"user\": \"652bc82b9f1b3475d5e48858\",\r\n\"flow\": \"undergraduate-application\",\r\n\"currentStage\": \"completedadmintest\",\r\n\"country\": \"652bc82b9f1b3475d5e48859\",\r\n\"firstName\": \"John\",\r\n\"lastName\": \"Doe\",\r\n\"email\": \"john.doe@example.com\",\r\n\"courseType\": \"652bc82b9f1b3475d5e48860\",\r\n\"courseOfInterest\": \"652bc82b9f1b3475d5e48861\",\r\n\"highestEducationLevel\": \"Bachelors\",\r\n\"board\": \"CBSE\",\r\n\"highestEducation\": \"Computer Science\",\r\n\"cgaScore\": \"3.8\",\r\n\"englishTest\": [\r\n{\r\n\"test\": \"652bc82b9f1b3475d5e48862\",\r\n\"score\": 7.5\r\n}\r\n],\r\n\"acdemicTest\": [\r\n{\r\n\"test\": \"652bc82b9f1b3475d5e48863\",\r\n\"score\": 1450\r\n}\r\n],\r\n\"startYear\": \"2024\",\r\n\"notDecidedYet\": false,\r\n\"loanType\": \"education\",\r\n\"budget\": {\r\n\"min\": 10000,\r\n\"max\": 30000\r\n},\r\n\"requiredLoanAmount\": {\r\n\"min\": 5000,\r\n\"max\": 20000\r\n},\r\n\"extraCurricularActivities\": \"Football, Music\",\r\n\"whatMatters\": {\r\n\"high\": [\"Quality Education\", \"International Exposure\"],\r\n\"medium\": [\"Location\", \"Community\"],\r\n\"low\": [\"Cost\"]\r\n}\r\n}\r\n'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get preference by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Preference Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.user).to.eql(pm.collectionVariables.get(\"user\"));\r",
+							"    pm.expect(jsonData.data.flow).to.eql(pm.collectionVariables.get(\"flow\"));\r",
+							"    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get(\"email\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/preferences/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.staging.futurx.in/api/preferences/670df6baf362d20babac0406' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a preference by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();   \r",
+							"pm.collectionVariables.set(\"user\", jsonData.data.user);\r",
+							"pm.collectionVariables.set(\"flow\", jsonData.data.flow);\r",
+							"pm.collectionVariables.set(\"email\", jsonData.data.email);\r",
+							"\r",
+							"pm.test(\"Preference updated successfully\", function () {\r",
+							"    pm.expect(jsonData.message).to.eq(\"Preference updated successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\":\"123@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://{{url}}/preferences/{{id}}",
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://api.staging.futurx.in/api/preferences/670df6baf362d20babac0406' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get preference by id After update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Preference Found\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.user).to.eql(pm.collectionVariables.get(\"user\"));\r",
+							"    pm.expect(jsonData.data.flow).to.eql(pm.collectionVariables.get(\"flow\"));\r",
+							"    pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get(\"email\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/preferences/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.staging.futurx.in/api/preferences/670df6baf362d20babac0406' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete preference by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Preference deleted successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Preference deleted successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8"
+					}
+				],
+				"url": "https://{{url}}/preferences/{{id}}",
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://api.staging.futurx.in/api/preferences/670df6baf362d20babac0406' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get preference by id After delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Preference deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Success\");\r",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"id\"));\r",
+							"    pm.expect(jsonData.data.isActive).to.eql(false);  \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": "https://{{url}}/preferences/{{id}}",
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://api.staging.futurx.in/api/preferences/670df6baf362d20babac0406' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOiJSeC1pVDRPVmRFaFRTNjJMM1p3WExNZUNrQ1NaR1NoYyIsInVzZXJJZCI6IjY3MGQwZWFmMWQwZGM0NmZkZGI1ZWUxMSIsImlhdCI6MTcyODk2NzAwMn0.VbZjh100xFNwi4Ch7wCakxIlLsoPOTJj7YVeIii2uQ8'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "api.staging.futurx.in/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "user",
+			"value": ""
+		},
+		{
+			"key": "flow",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		}
+	]
+}
