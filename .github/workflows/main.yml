@@ -58,7 +58,43 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AuditLog
-          path: AuditLog.xml    
+          path: AuditLog.xml  
+
+      - name: Auth
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Auth.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Auth.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Auth
+        uses: actions/upload-artifact@v3
+        with:
+          name: Auth
+          path: Auth.xml    
+
+      - name: Colleges
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Colleges.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Colleges.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Colleges
+        uses: actions/upload-artifact@v3
+        with:
+          name: Colleges
+          path: Colleges.xml     
           
       - name: Country
         # Continue even if the newman command fails (test failures)
@@ -310,4 +346,22 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TestScore
-          path: TestScore.xml    
+          path: TestScore.xml  
+
+      - name: Preference
+        # Continue even if the newman command fails (test failures)
+        env:
+          TOKEN: ${{ secrets.TOKEN }} # Inject secret token
+          URL: ${{ secrets.URL }}
+        run: |
+          newman run Preference.json --reporters cli,junit \
+          --env-var "url=$URL" \
+          --env-var "token=$TOKEN" \
+          --reporter-junit-export Preference.xml
+        continue-on-error: true  
+
+      - name: Upload JUnit report for Preference
+        uses: actions/upload-artifact@v3
+        with:
+          name: Preference
+          path: Preference.xml     
