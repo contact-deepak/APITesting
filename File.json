@@ -406,7 +406,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "img/logo1.png"
+							"src": "files/logo1.png"
 						}
 					]
 				},
@@ -503,8 +503,8 @@
 							"key": "files",
 							"type": "file",
 							"src": [
-								"img/logo1.png",
-								"img/logo2.png"
+								"files/logo1.png",
+								"files/logo2.png"
 							]
 						}
 					]
