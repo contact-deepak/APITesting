@@ -643,7 +643,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/deepa/Downloads/colleges (3).json"
+							"src": "files/college.json"
 						}
 					]
 				},
