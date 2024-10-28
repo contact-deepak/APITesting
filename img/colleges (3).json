@@ -1,0 +1,68 @@
+[{
+  "name": "Commercial Divers International",
+  "logo":  "66a3b7b47a95f76875ed9704",
+  "globalRank": "23",
+  "currency": "66a13e647a95f76875ed95cf",
+  "country": "66a3bdec7a95f76875ed9720",
+  "cost": {
+    "onCampusLiving": 23000,
+    "offCampusLiving": 67000
+  },
+  "aboutContent": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "howToApplyContent": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "placementContent": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "images": ["66a3b7b47a95f76875ed9704","66a3b7b47a95f76875ed9704"],
+  "admissionCriteria": ["60e9e63b8b3c5c5f20aeb5c6"],
+  "history": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "loanProviders": [
+    "66a3c02f7a95f76875ed9745","66a3bfe07a95f76875ed973f"
+  ],
+  "contactInformation": {
+    "latitude": "12.8535429",
+    "longitude": "77.5446643"
+  },
+  "established": 1991,
+  "eligibility": [
+    {
+      "title": "Bachelor's CGPA Requirement",
+      "score": "4/5"
+    },
+    {
+      "title": "UG Requirement",
+      "score": "4 years Engineering degree"
+    }
+  ],
+  "rankings": [
+    {
+      "rank":  "66a3c0c17a95f76875ed974d",
+      "rankValue": 5
+    },
+    {
+      "rank": "66a3c0e97a95f76875ed9753",
+      "rankValue": 4    
+    }
+  ],
+  "testScore": [
+    {
+      "test": "66a3c1477a95f76875ed975b",
+      "requiredScore": 75,
+      "totalScore": 100
+    },
+    {
+      "test": "66a3c1607a95f76875ed9761",
+      "requiredScore": 60,
+      "totalScore": 80
+    }
+  ],
+  "applicationFee": 5000,
+  "avgAdmissionRate": 56,
+  "avgTutionFee": 25000,
+  "socialMediaLinks": {},
+  "unitId": "4912191",
+  "avgApplicationFee": 123,
+  "avgCostOfLiving": 123,
+  "avgCourseFee": 123,
+  "avgTimeToApply": [ "3month"],
+  "chancesForJob": 25,
+  "isPromoted": true
+}]
